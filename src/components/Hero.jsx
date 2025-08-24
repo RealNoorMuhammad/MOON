@@ -117,7 +117,7 @@ const Hero = () => {
         </div>
 
         {/* Overlay Text */}
-        <h1 className="special-font hero-heading absolute bottom-5 right-5 z-40 text-blue-75">
+        <h1 className="special-font hero-heading absolute bottom-12 right-5 z-40 text-blue-75">
         $<b>M</b>OON
         </h1>
 
@@ -141,7 +141,7 @@ const Hero = () => {
         </div>
       </div>
 
-     <h1 className="special-font hero-heading text-shadow-outline absolute bottom-5 right-5 z-40 text-white">
+     <h1 className="special-font hero-heading text-shadow-outline absolute  bottom-12 right-5 z-40 text-white">
  $<b>M</b>OON
 </h1>
 

@@ -3,17 +3,17 @@ import gsap from "gsap";
 import { useWindowScroll } from "react-use";
 import { useEffect, useRef, useState } from "react";
 import { TiLocationArrow } from "react-icons/ti";
+import { FiMenu, FiX, FiMusic } from "react-icons/fi";
 
 import Button from "./Button";
 
 const navItems = ["Nexus", "Vault", "Prologue", "About", "Contact"];
 
 const NavBar = () => {
-  // State for toggling audio and visual indicator
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const [isIndicatorActive, setIsIndicatorActive] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Refs for audio and navigation container
   const audioElementRef = useRef(null);
   const navContainerRef = useRef(null);
 
@@ -21,13 +21,15 @@ const NavBar = () => {
   const [isNavVisible, setIsNavVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
-  // Toggle audio and visual indicator
   const toggleAudioIndicator = () => {
     setIsAudioPlaying((prev) => !prev);
     setIsIndicatorActive((prev) => !prev);
   };
 
-  // Manage audio playback
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen((prev) => !prev);
+  };
+
   useEffect(() => {
     if (isAudioPlaying) {
       audioElementRef.current.play();
@@ -38,19 +40,15 @@ const NavBar = () => {
 
   useEffect(() => {
     if (currentScrollY === 0) {
-      // Topmost position: show navbar without floating-nav
       setIsNavVisible(true);
       navContainerRef.current.classList.remove("floating-nav");
     } else if (currentScrollY > lastScrollY) {
-      // Scrolling down: hide navbar and apply floating-nav
       setIsNavVisible(false);
       navContainerRef.current.classList.add("floating-nav");
     } else if (currentScrollY < lastScrollY) {
-      // Scrolling up: show navbar with floating-nav
       setIsNavVisible(true);
       navContainerRef.current.classList.add("floating-nav");
     }
-
     setLastScrollY(currentScrollY);
   }, [currentScrollY, lastScrollY]);
 
@@ -62,63 +60,103 @@ const NavBar = () => {
     });
   }, [isNavVisible]);
 
+  // Single MusicButton component
+  const MusicButton = () => (
+    <button
+      onClick={toggleAudioIndicator}
+      className="flex items-center space-x-2 p-2 rounded hover:bg-gray-100 transition-colors"
+    >
+      <FiMusic size={24} className={clsx({ "text-blue-500": isIndicatorActive })} />
+     
+    </button>
+  );
+
   return (
     <div
       ref={navContainerRef}
-      className="fixed inset-x-0 top-4 z-50 h-16 border-none transition-all duration-700 sm:inset-x-6"
+      className="fixed inset-x-0 top-0 z-50 backdrop-blur-sm transition-all duration-700 sm:inset-x-6"
     >
-      <header className="absolute top-1/2 w-full -translate-y-1/2">
-        <nav className="flex size-full items-center justify-between p-4">
-          {/* Logo and Product button */}
-          <div className="flex items-center gap-7">
-            <img src="/img/logo.png" alt="logo" className="w-10" />
+      {/* Single audio element */}
+      <audio ref={audioElementRef} className="hidden" src="/audio/loop.mp3" loop />
+
+      <header className="w-full">
+        <nav className="flex items-center justify-between p-4">
+          {/* Logo */}
+          <div className="flex items-center gap-4">
+            <img src="/img/logo.png" alt="logo" className="w-14" />
+          </div>
+
+          {/* Desktop Menu */}
+          <div className="hidden md:flex items-center gap-6">
+            {navItems.map((item, index) => (
+              <a
+                key={index}
+                href={`#${item.toLowerCase()}`}
+                className="nav-hover-btn"
+              >
+                {item}
+              </a>
+            ))}
 
             <Button
               id="product-button"
               title="Products"
               rightIcon={<TiLocationArrow />}
-              containerClass="bg-blue-50 md:flex hidden items-center justify-center gap-1"
+              containerClass="bg-blue-50 flex items-center justify-center gap-1"
+            />
+
+            <MusicButton />
+          </div>
+
+          {/* Mobile Hamburger */}
+        {/* Mobile Hamburger */}
+<div className="md:hidden flex items-center gap-4">
+  <MusicButton />
+
+  <button onClick={toggleMobileMenu}>
+    {isMobileMenuOpen ? (
+      <FiX
+        size={24}
+        className={clsx(
+          currentScrollY === 0 ? "text-black" : "text-white",
+          "transition-colors duration-300"
+        )}
+      />
+    ) : (
+      <FiMenu
+        size={24}
+        className={clsx(
+          currentScrollY === 0 ? "text-black" : "text-white",
+          "transition-colors duration-300"
+        )}
+      />
+    )}
+  </button>
+</div>
+
+        </nav>
+
+        {/* Mobile Menu Dropdown */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden flex flex-col gap-4 p-4 bg-black border-t">
+            {navItems.map((item, index) => (
+              <a
+                key={index}
+                href={`#${item.toLowerCase()}`}
+                className="nav-hover-btn py-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {item}
+              </a>
+            ))}
+            <Button
+              id="product-button-mobile"
+              title="Products"
+              rightIcon={<TiLocationArrow />}
+              containerClass="bg-blue-50 flex items-center justify-center gap-1 w-full"
             />
           </div>
-
-          {/* Navigation Links and Audio Button */}
-          <div className="flex h-full items-center">
-            <div className="hidden md:block">
-              {navItems.map((item, index) => (
-                <a
-                  key={index}
-                  href={`#${item.toLowerCase()}`}
-                  className="nav-hover-btn"
-                >
-                  {item}
-                </a>
-              ))}
-            </div>
-
-            <button
-              onClick={toggleAudioIndicator}
-              className="ml-10 flex items-center space-x-0.5"
-            >
-              <audio
-                ref={audioElementRef}
-                className="hidden"
-                src="/audio/loop.mp3"
-                loop
-              />
-              {[1, 2, 3, 4].map((bar) => (
-                <div
-                  key={bar}
-                  className={clsx("indicator-line", {
-                    active: isIndicatorActive,
-                  })}
-                  style={{
-                    animationDelay: `${bar * 0.1}s`,
-                  }}
-                />
-              ))}
-            </button>
-          </div>
-        </nav>
+        )}
       </header>
     </div>
   );

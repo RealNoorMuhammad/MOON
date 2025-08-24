@@ -1,0 +1,411 @@
+.x-logo,
+.tiktok-logo,
+.telegram-logo,
+.dexscreener-logo {
+  display: inline-block;
+border: 2px solid #ccc; /* light gray border */
+  position: relative;
+  top: 15px;
+  background-color: rgb(205, 244, 255); /* white background */
+  border-radius: 50%; /* makes it fully rounded */
+  box-sizing: content-box; /* ensures padding doesn’t break sizing */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+
+.x-logo {
+  display: inline-block;
+  width: 20px;         /* size of the logo */
+  height: 20px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+
+  /* SVG X logo as background */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20.017'><path d='M 11.905 8.477 L 19.351 0 L 17.587 0 L 11.119 7.359 L 5.956 0 L 0 0 L 7.809 11.129 L 0 20.017 L 1.764 20.017 L 8.591 12.244 L 14.044 20.017 L 20 20.017 M 2.401 1.303 L 5.111 1.303 L 17.586 18.778 L 14.875 18.778' fill='black'/></svg>");
+}
+
+.x-logo:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+
+
+
+
+
+
+
+
+
+
+
+.tiktok-logo {
+  display: inline-block;
+  width: 20px;   /* adjust size */
+  height: 20px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+
+  /* TikTok SVG Logo */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 21.173 23.978'><g><path d='M 15.686 8.674 C 17.232 9.778 19.127 10.428 21.173 10.428 L 21.173 6.493 C 20.786 6.493 20.399 6.453 20.021 6.373 L 20.021 9.47 C 17.975 9.47 16.081 8.82 14.534 7.716 L 14.534 15.746 C 14.534 19.763 11.276 23.02 7.257 23.02 C 5.757 23.02 4.363 22.567 3.205 21.789 C 4.527 23.14 6.37 23.978 8.409 23.978 C 12.428 23.978 15.686 20.721 15.686 16.704 L 15.686 8.674 Z M 17.108 4.704 C 16.295 3.818 15.795 2.69 15.686 1.493 L 15.686 0.986 L 14.594 0.986 C 14.869 2.553 15.806 3.892 17.108 4.704 Z M 5.748 18.707 C 5.306 18.128 5.067 17.42 5.068 16.692 C 5.068 14.855 6.559 13.365 8.397 13.365 C 8.74 13.365 9.081 13.418 9.407 13.521 L 9.407 9.498 C 9.025 9.446 8.64 9.424 8.255 9.432 L 8.255 12.563 C 7.929 12.46 7.588 12.407 7.245 12.408 C 5.406 12.408 3.916 13.897 3.916 15.735 C 3.916 17.034 4.661 18.159 5.748 18.707 Z' fill='%23ff004f'/><path d='M 14.553 7.716 C 16.1 8.82 17.994 9.47 20.04 9.47 L 20.04 6.372 C 18.919 6.133 17.901 5.549 17.127 4.703 C 15.826 3.892 14.888 2.553 14.614 0.986 L 11.745 0.986 L 11.745 16.704 C 11.739 18.536 10.251 20.019 8.417 20.019 C 7.335 20.019 6.375 19.504 5.767 18.706 C 4.68 18.158 3.935 17.033 3.935 15.734 C 3.935 13.897 5.426 12.407 7.264 12.407 C 7.607 12.407 7.948 12.459 8.275 12.563 L 8.275 9.432 C 4.326 9.513 1.151 12.738 1.151 16.704 C 1.151 18.683 1.941 20.478 3.225 21.789 C 4.423 22.594 5.833 23.022 7.276 23.02 C 11.295 23.02 14.553 19.763 14.553 15.746 L 14.553 7.716 Z' fill='%23000'/><path d='M 20.041 6.344 L 20.041 5.507 C 19.012 5.508 18.002 5.22 17.128 4.675 C 17.902 5.521 18.92 6.105 20.041 6.344 Z M 14.615 0.958 C 14.589 0.808 14.569 0.657 14.555 0.506 L 14.555 0 L 10.595 0 L 10.595 15.717 C 10.588 17.549 9.101 19.033 7.266 19.033 C 6.727 19.033 6.218 18.905 5.768 18.678 C 6.376 19.476 7.337 19.991 8.418 19.991 C 10.252 19.991 11.74 18.508 11.747 16.675 L 11.747 0.958 L 14.615 0.958 Z M 8.276 9.404 L 8.276 8.512 C 7.945 8.467 7.612 8.444 7.278 8.444 C 3.258 8.444 0 11.7 0 15.717 C 0 18.236 1.281 20.455 3.227 21.761 C 1.943 20.449 1.152 18.655 1.152 16.675 C 1.152 12.709 4.328 9.485 8.276 9.403 Z' fill='%2300f2ea'/></g></svg>");
+}
+
+.tiktok-logo:hover {
+  transform: scale(1.1);
+  opacity: 0.85;
+}
+
+
+
+
+
+.telegram-logo {
+  display: inline-block;
+  width: 24px;   /* adjust size */
+  height: 24px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+
+  /* Telegram SVG Logo */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><defs><linearGradient id='grad' x1='0.5' y1='1' x2='0.5' y2='0'><stop offset='0' stop-color='%231d93d2'/><stop offset='1' stop-color='%2338b0e3'/></linearGradient></defs><circle cx='12' cy='12' r='12' fill='url(%23grad)'/><path d='M8.1 12.879L9.524 16.82s.178.368.368.368c.191 0 3.026-2.949 3.026-2.949l3.152-6.089-7.919 3.712z' fill='%23c8daea'/><path d='M10.028 13.9L9.755 16.805s-.115.89.775 0c.89-.89 1.742-1.577 1.742-1.577' fill='%23a9c6d8'/><path d='M8.138 13.035l-2.928-.954s-.35-.142-.238-.464c.024-.067.07-.123.21-.22.649-.452 12.011-4.536 12.011-4.536s.321-.108.51-.036c.095.029.167.108.188.205.021.085.029.172.026.259a9.55 9.55 0 0 1-.017.254c-.069 1.116-2.14 9.449-2.14 9.449s-.124.488-.568.504c-.22.008-.434-.075-.592-.229-.871-.749-3.882-2.772-4.548-3.217-.03-.021-.05-.054-.054-.09-.009-.047.042-.105.042-.105s5.242-4.66 5.382-5.15c.01-.038-.03-.056-.085-.04-.348.128-6.385 3.94-7.051 4.361-.048.015-.098.018-.148.009z' fill='%23fff'/></svg>");
+}
+
+.telegram-logo:hover {
+  transform: scale(1.1);
+  opacity: 0.85;
+}
+
+
+
+
+
+
+
+.dexscreener-logo {
+  display: inline-block;
+  width: 26px;   /* adjust size */
+  height: 26px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+
+  /* Dexscreener SVG Logo */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20.571 24.49'><g><path d='M 0 0 L 20.571 0 L 20.571 24.49 L 0 24.49 Z' fill='transparent'/><path d='M 12.393 8.724 C 13.142 8.35 14.096 7.8 15.05 7.047 C 15.251 7.465 15.273 7.829 15.17 8.124 C 15.096 8.331 14.958 8.512 14.776 8.656 C 14.579 8.811 14.332 8.924 14.06 8.985 C 13.544 9.101 12.941 9.033 12.393 8.724 Z M 12.523 12.551 L 13.515 13.124 C 11.49 14.259 10.94 16.366 10.286 18.419 C 9.632 16.366 9.081 14.259 7.057 13.124 L 8.048 12.551 C 8.245 12.477 8.372 12.284 8.362 12.074 C 8.271 10.152 8.79 9.302 9.49 8.768 C 9.741 8.577 10.015 8.481 10.286 8.481 C 10.556 8.481 10.83 8.577 11.081 8.768 C 11.782 9.302 12.301 10.152 12.21 12.074 C 12.2 12.284 12.326 12.477 12.523 12.551 Z M 10.286 0 C 11.432 0.031 12.581 0.253 13.578 0.686 C 14.269 0.986 14.913 1.383 15.497 1.857 C 15.76 2.071 15.977 2.278 16.216 2.516 C 16.861 2.538 17.803 1.822 18.241 1.152 C 17.488 3.62 14.053 6.534 11.675 7.649 C 11.674 7.648 11.673 7.648 11.673 7.647 C 11.246 7.322 10.766 7.159 10.286 7.159 C 9.806 7.159 9.326 7.322 8.899 7.647 C 8.898 7.648 8.898 7.649 8.897 7.649 C 6.518 6.534 3.084 3.62 2.331 1.152 C 2.768 1.822 3.71 2.538 4.355 2.516 C 4.594 2.278 4.811 2.071 5.074 1.857 C 5.658 1.383 6.302 0.986 6.993 0.686 C 7.99 0.253 9.14 0.031 10.286 0 Z M 6.511 8.985 C 6.239 8.924 5.993 8.811 5.796 8.656 C 5.614 8.512 5.475 8.331 5.402 8.124 C 5.298 7.829 5.32 7.465 5.521 7.047 C 6.476 7.8 7.429 8.35 8.178 8.724 C 7.631 9.033 7.028 9.101 6.511 8.985 Z' fill='%23000'/><path d='M 16.095 6.124 C 16.621 5.594 17.084 5.007 17.456 4.483 L 17.645 4.839 C 18.254 6.057 18.57 7.269 18.57 8.634 L 18.568 10.8 L 18.58 11.923 C 18.624 14.679 19.22 17.468 20.571 20.02 L 17.745 17.741 L 15.745 20.987 L 13.643 19.009 L 10.286 24.457 L 6.928 19.009 L 4.827 20.987 L 2.827 17.741 L 0 20.02 C 1.351 17.468 1.947 14.679 1.992 11.923 L 2.003 10.8 L 2.002 8.634 C 2.002 7.269 2.318 6.057 2.927 4.839 L 3.116 4.483 C 3.488 5.007 3.951 5.594 4.476 6.124 L 4.312 6.465 C 3.993 7.127 3.888 7.867 4.136 8.571 C 4.296 9.024 4.588 9.413 4.965 9.71 C 5.331 9.998 5.764 10.192 6.217 10.294 C 6.512 10.361 6.813 10.388 7.111 10.379 C 7.042 10.774 7.011 11.184 7.009 11.601 L 4.343 13.142 L 6.4 14.295 C 6.565 14.387 6.721 14.493 6.869 14.611 C 8.565 16.134 9.585 20.64 10.286 22.841 C 10.987 20.64 12.007 16.134 13.703 14.611 C 13.85 14.493 14.007 14.387 14.171 14.295 L 16.229 13.142 L 13.562 11.601 C 13.56 11.184 13.53 10.774 13.46 10.379 C 13.759 10.388 14.06 10.361 14.355 10.294 C 14.808 10.192 15.241 9.998 15.607 9.71 C 15.983 9.413 16.275 9.024 16.435 8.571 C 16.684 7.867 16.578 7.127 16.259 6.465 L 16.095 6.124 Z' fill='%23000'/></g></svg>");
+}
+
+.dexscreener-logo:hover {
+  transform: scale(1.1);
+  opacity: 0.85;
+}
+
+
+
+
+
+
+
+
+
+/* CoinGecko Logo */
+.coingecko-logo {
+  display: inline-block;
+  width: 26px;   /* adjust size */
+  height: 26px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+
+  /* CoinGecko SVG */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 250 250'><circle cx='125' cy='125' r='120' fill='%23f5e352'/><circle cx='125' cy='125' r='100' fill='%23a4cd39'/><path d='M 180 95 C 170 70 145 60 120 65 C 95 70 75 90 70 115 C 65 140 75 165 95 180 C 115 195 145 195 170 180 C 195 165 200 130 180 95 Z' fill='%23fff'/><circle cx='150' cy='95' r='15' fill='%23000'/></svg>");
+}
+
+.coingecko-logo:hover {
+  transform: scale(1.1);
+  opacity: 0.85;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Footer styling */
+.footer {
+
+
+
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+}
+
+.footer-content {
+  max-width: 1200px;
+
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap; /* makes it responsive */
+  gap: 12px;
+}
+
+/* Social icons row */
+.social-icons {
+  display: flex;
+  position: relative;
+  bottom: 15px;
+  align-items: center;
+  gap: 12px;
+}
+
+.social-icons img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.social-icons img:hover {
+  transform: scale(1.1);
+}
+
+/* Footer text (wallet address) */
+.footer-text {
+  
+  font-size: 14px;
+  word-break: break-all;
+  flex: 1;
+  text-align: center;
+}
+
+/* Copy button */
+.copy-btn {
+  position: relative;
+}
+
+.copy-btn button {
+  background: #000;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.copy-btn button:hover {
+  background: #333;
+}
+
+/* Copy success message */
+.copy-msg {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #000000;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  animation: fadeInOut 1.5s ease forwards;
+}
+
+/* Animation for "Copied!" */
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translate(-50%, 10px); }
+  20% { opacity: 1; transform: translate(-50%, 0); }
+  80% { opacity: 1; transform: translate(-50%, 0); }
+  100% { opacity: 0; transform: translate(-50%, -10px); }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Footer wrapper */
+.footer {
+  width: 100%;
+  background: #000000;
+  border-top: 1px solid #e5e7eb;
+  padding: 6px 12px; /* compact height */
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+}
+
+/* Content container */
+.footer-content {
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Social icons */
+.social-icons {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.social-icons a {
+  width: 22px;
+  height: 22px;
+  display: inline-block;
+  background-size: contain;
+  background-repeat: no-repeat;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.social-icons a:hover {
+  transform: scale(1.15);
+  opacity: 0.85;
+}
+
+/* Address + Copy button container */
+.address-copy {
+  display: flex;
+  align-items: center;   /* vertically center */
+  justify-content: flex-end;  /* push to the right */
+  gap: 8px;  /* space between CA and button */
+  flex: 1;
+}
+
+/* Wallet text */
+.footer-text {
+
+  font-size: 12px;
+  word-break: break-all;
+  color: #ffffff;
+  text-align: right; /* align text to the right */
+}
+
+
+/* Copy button */
+.copy-btn {
+  background: #ffffff;
+  color: #000000;
+  border: none;
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.25s ease, transform 0.25s ease;
+  box-shadow: 0 2px 6px rgba(0, 227, 220, 0.899);
+}
+
+.copy-btn:hover {
+  background: #006874;
+  transform: scale(1.05);
+}
+
+.copy-btn:active {
+  background: #000; /* stays black on click */
+  transform: scale(0.95);
+}
+
+/* Copied state */
+.copy-btn.copied {
+  background: #10b981; /* green */
+  color: #fff;
+}
+/* Default: Desktop / Tablet */
+.footer-content {
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Address + Copy button container */
+.address-copy {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex: 1;
+}
+
+/* Mobile layout */
+@media (max-width: 640px) {
+  .footer-content {
+    flex-direction: column;  /* stack items vertically */
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .social-icons {
+    justify-content: center;  /* center socials */
+    margin-bottom: 6px;
+  }
+
+  .address-copy {
+    justify-content: center;  /* center CA + button under socials */
+    flex: unset;
+  }
+
+  .footer-text {
+    text-align: center; /* CA centered */
+  }
+}
