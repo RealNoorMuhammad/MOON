@@ -13,7 +13,6 @@ const Hero = () => {
   const videoRef = useRef(null);
   const imgRef = useRef(null);
   const starsRef = useRef([]);
-  const hoverTextRef = useRef(null);
   const previewContainerRef = useRef(null);
 
   const handleMiniClick = () => {
@@ -37,9 +36,8 @@ const Hero = () => {
     });
   };
 
-  // Twinkling stars + blinking text
+  // Twinkling stars
   useEffect(() => {
-    // Twinkling stars
     starsRef.current.forEach((star) => {
       gsap.to(star, {
         opacity: Math.random(),
@@ -48,54 +46,19 @@ const Hero = () => {
         yoyo: true,
       });
     });
+  }, []);
 
-    // Blinking "Who is Moon?" text
-    gsap.to(hoverTextRef.current, {
-      opacity: 0,
+  // Pop-up image animation every 3 seconds
+  useEffect(() => {
+    gsap.to(imgRef.current, {
+      opacity: 1,
+      scale: 1,
       duration: 0.8,
       repeat: -1,
       yoyo: true,
-      ease: "power1.inOut",
+      ease: "power2.inOut",
+      repeatDelay: 2, // Wait 2 seconds before popping again, total 3s including animation
     });
-  }, []);
-
-  // Hover effect for image and text
-  useEffect(() => {
-    const container = previewContainerRef.current;
-
-    const handleMouseEnter = () => {
-      gsap.to(imgRef.current, {
-        opacity: 1,
-        scale: 1,
-        duration: 0.5,
-        ease: "power2.out",
-      });
-      gsap.to(hoverTextRef.current, {
-        opacity: 0,
-        duration: 0.3,
-      });
-    };
-
-    const handleMouseLeave = () => {
-      gsap.to(imgRef.current, {
-        opacity: 0,
-        scale: 0.5,
-        duration: 0.5,
-        ease: "power2.in",
-      });
-      gsap.to(hoverTextRef.current, {
-        opacity: 1,
-        duration: 0.3,
-      });
-    };
-
-    container.addEventListener("mouseenter", handleMouseEnter);
-    container.addEventListener("mouseleave", handleMouseLeave);
-
-    return () => {
-      container.removeEventListener("mouseenter", handleMouseEnter);
-      container.removeEventListener("mouseleave", handleMouseLeave);
-    };
   }, []);
 
   // Scroll-triggered video frame animation
@@ -121,7 +84,7 @@ const Hero = () => {
   const renderStars = () => {
     const stars = [];
     for (let i = 0; i < 100; i++) {
-      const size = Math.random() * 2 + 1; // 1px to 3px
+      const size = Math.random() * 2 + 1;
       stars.push(
         <div
           key={i}
@@ -148,20 +111,13 @@ const Hero = () => {
       <div className="absolute inset-0 -z-20">{renderStars()}</div>
 
       {/* Black background layer */}
-      <div className="absolute inset-0 -z-10 bg-black" />
+      <div className="absolute inset-0 -z-10 " />
 
-      {/* Hover text + preview image */}
+      {/* Animated Pop-up Image */}
       <div
         ref={previewContainerRef}
-        className="absolute z-30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer"
+        className="absolute z-30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
       >
-        <h2
-          ref={hoverTextRef}
-          className="text-white text-4xl font-bold"
-        >
-          Who is Moon ?
-        </h2>
-
         <img
           ref={imgRef}
           src="https://res.cloudinary.com/dnbeefkuz/image/upload/v1756022392/4994632179237629484_psg3jv.jpg"
@@ -176,7 +132,6 @@ const Hero = () => {
         className="relative z-10 h-dvh w-screen overflow-hidden rounded-lg"
       >
         <div>
-          {/* Mini Image Preview */}
           <div className="mask-clip-path absolute-center absolute z-50 size-64 cursor-pointer overflow-hidden rounded-lg">
             <VideoPreview>
               <div onClick={handleMiniClick} className="origin-center">
@@ -200,7 +155,7 @@ const Hero = () => {
         <div className="absolute left-0 top-0 z-40 size-full">
           <div className="mt-24 px-5 sm:px-10">
             <h1 className="special-font hero-heading text-blue-100 text-shadow-outline">
-              MOON MOON
+              $MOON 
             </h1>
           </div>
         </div>

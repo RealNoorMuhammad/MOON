@@ -20,6 +20,7 @@ const NavBar = () => {
   const { y: currentScrollY } = useWindowScroll();
   const [isNavVisible, setIsNavVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [hasBorder, setHasBorder] = useState(false);
 
   const toggleAudioIndicator = () => {
     setIsAudioPlaying((prev) => !prev);
@@ -41,12 +42,15 @@ const NavBar = () => {
   useEffect(() => {
     if (currentScrollY === 0) {
       setIsNavVisible(true);
+      setHasBorder(false); // remove border at start
       navContainerRef.current.classList.remove("floating-nav");
     } else if (currentScrollY > lastScrollY) {
       setIsNavVisible(false);
+      setHasBorder(true);
       navContainerRef.current.classList.add("floating-nav");
     } else if (currentScrollY < lastScrollY) {
       setIsNavVisible(true);
+      setHasBorder(true);
       navContainerRef.current.classList.add("floating-nav");
     }
     setLastScrollY(currentScrollY);
@@ -60,7 +64,6 @@ const NavBar = () => {
     });
   }, [isNavVisible]);
 
-  // Single MusicButton component
   const MusicButton = () => (
     <button
       onClick={toggleAudioIndicator}
@@ -79,24 +82,28 @@ const NavBar = () => {
   return (
     <div
       ref={navContainerRef}
-      className="fixed inset-x-0 top-0 z-50 backdrop-blur-sm transition-all duration-700 border-b border-white"
+      className={clsx(
+        "fixed inset-x-0 top-0 z-50 backdrop-blur-sm transition-all duration-700",
+        hasBorder ? "border-b border-white" : "border-none"
+      )}
     >
       <audio ref={audioElementRef} className="hidden" src="/audio/loop.mp3" loop />
 
       <header className="w-full">
-        <nav className="flex items-center justify-between p-4 relative">
+        {/* Navbar fixed height 70px */}
+        <nav className="flex items-center justify-between relative h-[70px] px-4">
           {/* Left: Music */}
-          <div className="absolute left-4 md:left-6 flex items-center">
+          <div className="absolute left-4 md:left-6 flex items-center h-full">
             <MusicButton />
           </div>
 
           {/* Center: Logo */}
-          <div className="mx-auto flex justify-center items-center">
-            <img src="/img/logo.png" alt="logo" className="w-14" />
+          <div className="mx-auto text-white font-bold text-lg md:hidden">
+           
           </div>
 
           {/* Right: Hamburger Menu */}
-          <div className="absolute right-4 md:right-6 flex items-center md:hidden">
+          <div className="absolute right-4 md:right-6 flex items-center h-full md:hidden">
             <button onClick={toggleMobileMenu}>
               {isMobileMenuOpen ? (
                 <FiX size={24} className="text-white transition-colors duration-300" />
@@ -106,10 +113,14 @@ const NavBar = () => {
             </button>
           </div>
 
-          {/* Desktop Menu (optional, hidden on scroll if needed) */}
-          <div className="hidden md:flex items-center gap-6 ml-auto">
+          {/* Desktop Menu */}
+          <div className="hidden md:flex items-center gap-6 ml-auto h-full">
             {navItems.map((item, index) => (
-              <a key={index} href={`#${item.toLowerCase()}`} className="text-white nav-hover-btn">
+              <a
+                key={index}
+                href={`#${item.toLowerCase()}`}
+                className="text-white nav-hover-btn"
+              >
                 {item}
               </a>
             ))}
