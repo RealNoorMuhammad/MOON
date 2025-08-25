@@ -1,22 +1,20 @@
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/all";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
-import Button from "./Button";
 import VideoPreview from "./VideoPreview";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Hero = () => {
-  const [setHasClicked] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [hasClicked, setHasClicked] = useState(false);
 
   const videoRef = useRef(null);
   const imgRef = useRef(null);
-
-  // Simulate "loading" until video is ready
-  const handleVideoLoad = () => setLoading(false);
+  const starsRef = useRef([]);
+  const hoverTextRef = useRef(null);
+  const previewContainerRef = useRef(null);
 
   const handleMiniClick = () => {
     setHasClicked(true);
@@ -29,7 +27,7 @@ const Hero = () => {
       height: "100%",
       duration: 1,
       ease: "power1.inOut",
-      onStart: () => videoRef.current.play(),
+      onStart: () => videoRef.current?.play(),
     });
     gsap.from("#current-image", {
       transformOrigin: "center center",
@@ -39,7 +37,68 @@ const Hero = () => {
     });
   };
 
-  // clipPath animation on scroll
+  // Twinkling stars + blinking text
+  useEffect(() => {
+    // Twinkling stars
+    starsRef.current.forEach((star) => {
+      gsap.to(star, {
+        opacity: Math.random(),
+        duration: 1 + Math.random() * 2,
+        repeat: -1,
+        yoyo: true,
+      });
+    });
+
+    // Blinking "Who is Moon?" text
+    gsap.to(hoverTextRef.current, {
+      opacity: 0,
+      duration: 0.8,
+      repeat: -1,
+      yoyo: true,
+      ease: "power1.inOut",
+    });
+  }, []);
+
+  // Hover effect for image and text
+  useEffect(() => {
+    const container = previewContainerRef.current;
+
+    const handleMouseEnter = () => {
+      gsap.to(imgRef.current, {
+        opacity: 1,
+        scale: 1,
+        duration: 0.5,
+        ease: "power2.out",
+      });
+      gsap.to(hoverTextRef.current, {
+        opacity: 0,
+        duration: 0.3,
+      });
+    };
+
+    const handleMouseLeave = () => {
+      gsap.to(imgRef.current, {
+        opacity: 0,
+        scale: 0.5,
+        duration: 0.5,
+        ease: "power2.in",
+      });
+      gsap.to(hoverTextRef.current, {
+        opacity: 1,
+        duration: 0.3,
+      });
+    };
+
+    container.addEventListener("mouseenter", handleMouseEnter);
+    container.addEventListener("mouseleave", handleMouseLeave);
+
+    return () => {
+      container.removeEventListener("mouseenter", handleMouseEnter);
+      container.removeEventListener("mouseleave", handleMouseLeave);
+    };
+  }, []);
+
+  // Scroll-triggered video frame animation
   useGSAP(() => {
     gsap.set("#video-frame", {
       clipPath: "polygon(14% 0, 72% 0, 88% 90%, 0 95%)",
@@ -58,61 +117,79 @@ const Hero = () => {
     });
   }, []);
 
+  // Generate star elements
+  const renderStars = () => {
+    const stars = [];
+    for (let i = 0; i < 100; i++) {
+      const size = Math.random() * 2 + 1; // 1px to 3px
+      stars.push(
+        <div
+          key={i}
+          ref={(el) => (starsRef.current[i] = el)}
+          style={{
+            position: "absolute",
+            top: `${Math.random() * 100}%`,
+            left: `${Math.random() * 100}%`,
+            width: size,
+            height: size,
+            backgroundColor: "white",
+            borderRadius: "50%",
+            opacity: Math.random(),
+          }}
+        />
+      );
+    }
+    return stars;
+  };
+
   return (
     <div className="relative h-dvh w-screen overflow-x-hidden">
-      {loading && (
-        <div className="flex-center absolute z-[100] h-dvh w-screen overflow-hidden bg-violet-50">
-          <div className="three-body">
-            <div className="three-body__dot"></div>
-            <div className="three-body__dot"></div>
-            <div className="three-body__dot"></div>
-          </div>
-        </div>
-      )}
+      {/* Starry background */}
+      <div className="absolute inset-0 -z-20">{renderStars()}</div>
 
+      {/* Black background layer */}
+      <div className="absolute inset-0 -z-10 bg-black" />
+
+      {/* Hover text + preview image */}
+      <div
+        ref={previewContainerRef}
+        className="absolute z-30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer"
+      >
+        <h2
+          ref={hoverTextRef}
+          className="text-white text-4xl font-bold"
+        >
+          Who is Moon ?
+        </h2>
+
+        <img
+          ref={imgRef}
+          src="https://res.cloudinary.com/dnbeefkuz/image/upload/v1756022392/4994632179237629484_psg3jv.jpg"
+          alt="preview"
+          className="absolute top-0 left-0 w-64 h-64 object-cover opacity-0 scale-50 rounded-lg"
+        />
+      </div>
+
+      {/* Video frame */}
       <div
         id="video-frame"
-        className="relative z-10 h-dvh w-screen overflow-hidden rounded-lg bg-blue-75"
+        className="relative z-10 h-dvh w-screen overflow-hidden rounded-lg"
       >
         <div>
           {/* Mini Image Preview */}
           <div className="mask-clip-path absolute-center absolute z-50 size-64 cursor-pointer overflow-hidden rounded-lg">
             <VideoPreview>
-              <div
-                onClick={handleMiniClick}
-                className="origin-center scale-50 opacity-0 transition-all duration-500 ease-in hover:scale-100 hover:opacity-100"
-              >
+              <div onClick={handleMiniClick} className="origin-center">
                 <img
                   ref={imgRef}
                   src="https://res.cloudinary.com/dnbeefkuz/image/upload/v1756022392/4994632179237629484_psg3jv.jpg"
                   alt="preview"
                   id="current-image"
-                  className="size-64 origin-center scale-150 object-cover object-center"
+                  className="size-64 origin-center scale-150 object-cover object-center opacity-0"
                 />
               </div>
             </VideoPreview>
           </div>
-
-          {/* Expanding Video */}
-          <video
-            ref={videoRef}
-            src="https://res.cloudinary.com/dnbeefkuz/video/upload/v1756021269/Worldwide_Howl_at_the_Moon_Night_Wolves_Howling_at_the_Moon_vdgzol.mp4"
-            loop
-            muted
-            id="next-video"
-            className="absolute-center invisible absolute z-20 size-64 object-cover object-center"
-            onLoadedData={handleVideoLoad}
-          />
-
-          {/* Background Video */}
-          <video
-            src="https://res.cloudinary.com/dnbeefkuz/video/upload/v1756021269/Worldwide_Howl_at_the_Moon_Night_Wolves_Howling_at_the_Moon_vdgzol.mp4"
-            autoPlay
-            loop
-            muted
-            className="absolute left-0 top-0 size-full object-cover object-center"
-            onLoadedData={handleVideoLoad}
-          />
         </div>
 
         {/* Overlay Text */}

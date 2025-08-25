@@ -7,16 +7,20 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import Background from "./components/Background";
 
+import Marquee from "./components/Marquee";
+
 function App() {
   return (
     <main className="relative min-h-screen w-screen overflow-x-hidden">
       <Background />
       <NavBar />
       <Hero />
+      < Marquee/>
       <About />
       <Features />
-   
+     < Marquee/>
       <Contact />
+      
       <Footer />
     </main>
   );

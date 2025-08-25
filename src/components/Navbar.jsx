@@ -7,7 +7,7 @@ import { FiMenu, FiX, FiMusic } from "react-icons/fi";
 
 import Button from "./Button";
 
-const navItems = ["About $MOON", "Dexscreener", "Telegram", "Twitter(X)", ];
+const navItems = ["About $MOON", "Dexscreener", "Telegram", "Twitter(X)"];
 
 const NavBar = () => {
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
@@ -64,86 +64,71 @@ const NavBar = () => {
   const MusicButton = () => (
     <button
       onClick={toggleAudioIndicator}
-      className="flex items-center space-x-2 p-2 rounded hover:bg-gray-100 transition-colors"
+      className="flex items-center p-2 rounded hover:bg-gray-200 transition-colors"
     >
-      <FiMusic size={24} className={clsx({ "text-blue-500": isIndicatorActive })} />
-     
+      <FiMusic
+        size={24}
+        className={clsx(
+          "text-white transition-colors duration-300",
+          isIndicatorActive && "text-blue-500"
+        )}
+      />
     </button>
   );
 
   return (
     <div
       ref={navContainerRef}
-      className="fixed inset-x-0 top-0 z-50 backdrop-blur-sm transition-all duration-700 sm:inset-x-6"
+      className="fixed inset-x-0 top-0 z-50 backdrop-blur-sm transition-all duration-700 border-b border-white"
     >
-      {/* Single audio element */}
       <audio ref={audioElementRef} className="hidden" src="/audio/loop.mp3" loop />
 
       <header className="w-full">
-        <nav className="flex items-center justify-between p-4">
-          {/* Logo */}
-          <div className="flex items-center gap-4">
-            <img src="/img/logo.png" alt="logo" className="w-14" />
-          </div>
-
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-6">
-            {navItems.map((item, index) => (
-              <a
-                key={index}
-                href={`#${item.toLowerCase()}`}
-                className="nav-hover-btn"
-              >
-                {item}
-              </a>
-            ))}
-
-            <Button
-              id="product-button"
-              title="Buy $MOON"
-             
-              containerClass="bg-blue-50 flex items-center justify-center gap-1"
-            />
-
+        <nav className="flex items-center justify-between p-4 relative">
+          {/* Left: Music */}
+          <div className="absolute left-4 md:left-6 flex items-center">
             <MusicButton />
           </div>
 
-          {/* Mobile Hamburger */}
-        {/* Mobile Hamburger */}
-<div className="md:hidden flex items-center gap-4">
-  <MusicButton />
+          {/* Center: Logo */}
+          <div className="mx-auto flex justify-center items-center">
+            <img src="/img/logo.png" alt="logo" className="w-14" />
+          </div>
 
-  <button onClick={toggleMobileMenu}>
-    {isMobileMenuOpen ? (
-      <FiX
-        size={24}
-        className={clsx(
-          currentScrollY === 0 ? "text-black" : "text-white",
-          "transition-colors duration-300"
-        )}
-      />
-    ) : (
-      <FiMenu
-        size={24}
-        className={clsx(
-          currentScrollY === 0 ? "text-black" : "text-white",
-          "transition-colors duration-300"
-        )}
-      />
-    )}
-  </button>
-</div>
+          {/* Right: Hamburger Menu */}
+          <div className="absolute right-4 md:right-6 flex items-center md:hidden">
+            <button onClick={toggleMobileMenu}>
+              {isMobileMenuOpen ? (
+                <FiX size={24} className="text-white transition-colors duration-300" />
+              ) : (
+                <FiMenu size={24} className="text-white transition-colors duration-300" />
+              )}
+            </button>
+          </div>
 
+          {/* Desktop Menu (optional, hidden on scroll if needed) */}
+          <div className="hidden md:flex items-center gap-6 ml-auto">
+            {navItems.map((item, index) => (
+              <a key={index} href={`#${item.toLowerCase()}`} className="text-white nav-hover-btn">
+                {item}
+              </a>
+            ))}
+            <Button
+              id="product-button"
+              title="Buy $MOON"
+              containerClass="bg-white text-black flex items-center justify-center gap-1"
+            />
+          </div>
         </nav>
 
         {/* Mobile Menu Dropdown */}
         {isMobileMenuOpen && (
-          <div className="md:hidden flex flex-col gap-4 p-4 bg-black border-t">
+          <div className="md:hidden flex flex-col gap-4 p-4 bg-black border-t border-gray-700">
             {navItems.map((item, index) => (
               <a
                 key={index}
                 href={`#${item.toLowerCase()}`}
-                className="nav-hover-btn py-2"
+                className="nav-hover-btn py-2 text-white"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {item}
@@ -151,8 +136,8 @@ const NavBar = () => {
             ))}
             <Button
               id="product-button-mobile"
-              title="Buy Moon "
-              rightIcon={<TiLocationArrow />}  //here I want wolf icon
+              title="Buy Moon"
+              rightIcon={<TiLocationArrow />}
               containerClass="bg-blue-50 flex items-center justify-center gap-1 w-full"
             />
           </div>
