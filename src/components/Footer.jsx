@@ -4,7 +4,7 @@ import "./Footer.css";
 
 const Footer = () => {
   const [copied, setCopied] = useState(false);
-  const contractAddress = "AdxNrCntq6YkYC29VffF2Fw7WC1UatKhV8J6G4ekgNx3";
+  const contractAddress = "caaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
 
   const handleCopy = async () => {
     try {
@@ -21,11 +21,11 @@ const Footer = () => {
       <div className="footer-content">
         {/* Social icons */}
         <div className="social-icons">
-          <a href="https://x.com/SonCoin_" target="_blank" rel="noopener noreferrer" className="x-logo"></a>
+          <a href="" target="_blank" rel="noopener noreferrer" className="x-logo"></a>
       
-          <a href="https://t.me/winningsonsol" target="_blank" rel="noopener noreferrer" className="telegram-logo"></a>
+          <a href="" target="_blank" rel="noopener noreferrer" className="telegram-logo"></a>
           <a
-            href="https://dexscreener.com/solana/gxqaxqzxmm7hmpqlrtbcm9tztukj2m4uatvqnqj1oznf"
+            href=""
             target="_blank"
             rel="noopener noreferrer"
             className="dexscreener-logo"

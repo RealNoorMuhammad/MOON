@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { TiLocationArrow } from "react-icons/ti";
-
+import Memes from './Memes'
+// Tilt Wrapper
 export const BentoTilt = ({ children, className = "" }) => {
   const [transformStyle, setTransformStyle] = useState("");
   const itemRef = useRef(null);
@@ -8,22 +9,19 @@ export const BentoTilt = ({ children, className = "" }) => {
   const handleMouseMove = (event) => {
     if (!itemRef.current) return;
 
-    const { left, top, width, height } =
-      itemRef.current.getBoundingClientRect();
-
+    const { left, top, width, height } = itemRef.current.getBoundingClientRect();
     const relativeX = (event.clientX - left) / width;
     const relativeY = (event.clientY - top) / height;
 
     const tiltX = (relativeY - 0.5) * 5;
     const tiltY = (relativeX - 0.5) * -5;
 
-    const newTransform = `perspective(700px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(.95, .95, .95)`;
-    setTransformStyle(newTransform);
+    setTransformStyle(
+      `perspective(700px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(.95, .95, .95)`
+    );
   };
 
-  const handleMouseLeave = () => {
-    setTransformStyle("");
-  };
+  const handleMouseLeave = () => setTransformStyle("");
 
   return (
     <div
@@ -38,6 +36,7 @@ export const BentoTilt = ({ children, className = "" }) => {
   );
 };
 
+// Card
 export const BentoCard = ({ src, title, description, isComingSoon }) => {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [hoverOpacity, setHoverOpacity] = useState(0);
@@ -46,7 +45,6 @@ export const BentoCard = ({ src, title, description, isComingSoon }) => {
   const handleMouseMove = (event) => {
     if (!hoverButtonRef.current) return;
     const rect = hoverButtonRef.current.getBoundingClientRect();
-
     setCursorPosition({
       x: event.clientX - rect.left,
       y: event.clientY - rect.top,
@@ -56,20 +54,34 @@ export const BentoCard = ({ src, title, description, isComingSoon }) => {
   const handleMouseEnter = () => setHoverOpacity(1);
   const handleMouseLeave = () => setHoverOpacity(0);
 
+  const isVideo = src.endsWith(".mp4") || src.endsWith(".webm");
+
   return (
     <div className="relative size-full">
-      <video
-        src={src}
-        loop
-        muted
-        autoPlay
-        className="absolute left-0 top-0 size-full object-cover object-center"
-      />
-      <div className="relative z-10 flex size-full flex-col justify-between p-5 text-blue-50">
+      {isVideo ? (
+        <video
+          src={src}
+          loop
+          muted
+          autoPlay
+          className="absolute left-0 top-0 size-full object-cover object-center"
+        />
+      ) : (
+        <img
+          src={src}
+          alt={typeof title === "string" ? title : "bento-media"}
+          className="absolute left-0 top-0 size-full object-cover object-center"
+        />
+      )}
+
+      {/* ✅ Centered Text */}
+      <div className="relative z-10 flex size-full flex-col items-center justify-center p-5 text-blue-50 text-center">
         <div>
           <h1 className="bento-title special-font">{title}</h1>
           {description && (
-            <p className="mt-3 max-w-64 text-xs md:text-base">{description}</p>
+            <p className="mt-3 max-w-xl text-xs md:text-base mx-auto">
+              {description}
+            </p>
           )}
         </div>
 
@@ -79,7 +91,7 @@ export const BentoCard = ({ src, title, description, isComingSoon }) => {
             onMouseMove={handleMouseMove}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            className="border-hsla relative flex w-fit cursor-pointer items-center gap-1 overflow-hidden rounded-full bg-black px-5 py-2 text-xs uppercase text-white/20"
+            className="border-hsla relative mt-6 flex w-fit cursor-pointer items-center gap-1 overflow-hidden rounded-full bg-black px-5 py-2 text-xs uppercase text-white/20"
           >
             {/* Radial gradient hover effect */}
             <div
@@ -98,93 +110,95 @@ export const BentoCard = ({ src, title, description, isComingSoon }) => {
   );
 };
 
+// Features Section
 const Features = () => (
-  <section className="bg-black pb-52">
+  <section className="bg-black pb-1">
     <div className="container mx-auto px-3 md:px-10">
-      <div className="px-5 py-32">
+      {/* Section Intro */}
+      <div className="px-5 py-32 text-center">
         <p className="font-circular-web text-lg text-blue-50">
-          Into the Metagame Layer
+         <h1 className="bento-title special-font text-3xl md:text-4xl">
+       How to Buy $MOON
+      </h1>
         </p>
-        <p className="max-w-md font-circular-web text-lg text-blue-50 opacity-50">
-          Immerse yourself in a rich and ever-expanding universe where a vibrant
-          array of products converge into an interconnected overlay experience
-          on your world.
-        </p>
+      
       </div>
 
-      <BentoTilt className="border-hsla relative mb-7 h-96 w-full overflow-hidden rounded-md md:h-[65vh]">
-        <BentoCard
-          src="videos/feature-1.mp4"
-          title={
-            <>
-              radia<b>n</b>t
-            </>
-          }
-          description="A cross-platform metagame app, turning your activities across Web2 and Web3 games into a rewarding adventure."
-          isComingSoon
-        />
-      </BentoTilt>
+      {/* How to Buy Card */}
+ <BentoTilt className="border-hsla relative mb-7 h-auto w-full overflow-hidden rounded-md md:h-[70vh]">
+  <div className="relative size-full">
+    {/* Background GIF */}
+    <img
+      src="videos/one.gif"
+      alt="How to Buy MoonMoon"
+      className="absolute left-0 top-0 size-full object-cover object-center"
+    />
 
-      <div className="grid h-[135vh] w-full grid-cols-2 grid-rows-3 gap-7">
-        <BentoTilt className="bento-tilt_1 row-span-1 md:col-span-1 md:row-span-2">
-          <BentoCard
-            src="videos/feature-2.mp4"
-            title={
-              <>
-                zig<b>m</b>a
-              </>
-            }
-            description="An anime and gaming-inspired NFT collection - the IP primed for expansion."
-            isComingSoon
-          />
-        </BentoTilt>
+    {/* 🔥 Black overlay */}
+    <div className="absolute inset-0 bg-black/70 mix-blend-multiply"></div>
 
-        <BentoTilt className="bento-tilt_1 row-span-1 ms-32 md:col-span-1 md:ms-0">
-          <BentoCard
-            src="videos/feature-3.mp4"
-            title={
-              <>
-                n<b>e</b>xus
-              </>
-            }
-            description="A gamified social hub, adding a new dimension of play to social interaction for Web3 communities."
-            isComingSoon
-          />
-        </BentoTilt>
 
-        <BentoTilt className="bento-tilt_1 me-14 md:col-span-1 md:me-0">
-          <BentoCard
-            src="videos/feature-4.mp4"
-            title={
-              <>
-                az<b>u</b>l
-              </>
-            }
-            description="A cross-world AI Agent - elevating your gameplay to be more fun and productive."
-            isComingSoon
-          />
-        </BentoTilt>
+    <div className="relative z-10 flex size-full flex-col items-center justify-center p-8 text-center text-white">
+      
 
-        <BentoTilt className="bento-tilt_2">
-          <div className="flex size-full flex-col justify-between bg-violet-300 p-5">
-            <h1 className="bento-title special-font max-w-64 text-black">
-              M<b>o</b>re co<b>m</b>ing s<b>o</b>on.
-            </h1>
+      <div className="space-y-6 mt-6 text-sm md:text-base leading-relaxed max-w-2xl">
+        <div>
+          
+         <b><div className="flex items-center justify-center gap-6 pb-2">
+          <img src="/videos/phantom.png" alt="Phantom" className="h-10 w-10" />
+    
+        </div></b>
+          <p className="opacity-80">
+            Download <span className="font-bold">Phantom</span> or{" "}
+            <span className="font-bold">Solflare</span> — your shiny bag
+            to carry $MOONMOON.
+          </p>
+        </div>
+        <div>
+        <b><div className="flex items-center justify-center gap-6 pb-2">
+          <img src="/videos/solana.png" alt="Phantom" className="h-12 w-12" />
+    
+        </div></b>
+      
+          <p className="opacity-80">
+            Buy some SOL from Coinbase, Binance, etc. and send it to your wallet.
+          </p>
+        </div>
+        <div>
+         <b><div className="flex items-center justify-center gap-6 pb-2">
+          <img src="/img/logo.png" alt="Phantom" className="h-12 w-12" />
+    
+        </div></b>
+          <p className="opacity-80">
+            Go to <span className="font-bold">Raydium</span> or{" "}
+            <span className="font-bold">Jupiter DEX</span>, swap your SOL for $MOON.
+          </p>
+        </div>
+        <div>
+          <b><div className="flex items-center justify-center gap-6 pb-3">
+          <img src="/videos/arrow.png" alt="Phantom" className="h-10 w-10" />
+    
+        </div></b>
+          <p className="opacity-80">
+            That’s it — you’re officially part of the wolf pack. Howl with us as we stumble, trip, and moon together.
+          </p>
+        </div>
 
-            <TiLocationArrow className="m-5 scale-[5] self-end" />
-          </div>
-        </BentoTilt>
-
-        <BentoTilt className="bento-tilt_2">
-          <video
-            src="videos/feature-5.mp4"
-            loop
-            muted
-            autoPlay
-            className="size-full object-cover object-center"
-          />
-        </BentoTilt>
+        {/* Icon Row */}
+       
       </div>
+    </div>
+  </div>
+</BentoTilt>
+
+
+      {/* Grid Features */}
+   <div>
+  <Memes/>
+
+   </div>
+
+
     </div>
   </section>
 );

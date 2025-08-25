@@ -1,8 +1,7 @@
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/all";
-import { TiLocationArrow } from "react-icons/ti";
-import {  useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 import Button from "./Button";
 import VideoPreview from "./VideoPreview";
@@ -117,34 +116,23 @@ const Hero = () => {
         </div>
 
         {/* Overlay Text */}
-        <h1 className="special-font hero-heading absolute bottom-12 right-5 z-40 text-blue-75">
-        $<b>M</b>OON
+        <h1 className="special-font hero-heading absolute right-5 z-40 text-blue-75 bottom-24">
+          $MOON
         </h1>
 
         <div className="absolute left-0 top-0 z-40 size-full">
           <div className="mt-24 px-5 sm:px-10">
-            <h1 className="special-font hero-heading text-blue-100">
-              redefi<b>n</b>e
+            <h1 className="special-font hero-heading text-blue-100 text-shadow-outline">
+              MOON MOON
             </h1>
-
-            <p className="mb-5 max-w-64 font-robert-regular text-blue-100">
-              Enter the Metagame Layer <br /> Unleash the Play Economy
-            </p>
-
-            <Button
-              id="watch-trailer"
-              title="Watch trailer"
-              leftIcon={<TiLocationArrow />}
-              containerClass="bg-yellow-300 flex-center gap-1"
-            />
           </div>
         </div>
       </div>
 
-     <h1 className="special-font hero-heading text-shadow-outline absolute  bottom-12 right-5 z-40 text-white">
- $<b>M</b>OON
-</h1>
-
+      {/* Second Heading */}
+      <h1 className="special-font hero-heading text-shadow-outline absolute right-5 z-40 text-white bottom-24">
+        $MOON
+      </h1>
     </div>
   );
 };

@@ -7,7 +7,7 @@ import { FiMenu, FiX, FiMusic } from "react-icons/fi";
 
 import Button from "./Button";
 
-const navItems = ["Nexus", "Vault", "Prologue", "About", "Contact"];
+const navItems = ["About $MOON", "Dexscreener", "Telegram", "Twitter(X)", ];
 
 const NavBar = () => {
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
@@ -100,8 +100,8 @@ const NavBar = () => {
 
             <Button
               id="product-button"
-              title="Products"
-              rightIcon={<TiLocationArrow />}
+              title="Buy $MOON"
+             
               containerClass="bg-blue-50 flex items-center justify-center gap-1"
             />
 
@@ -151,8 +151,8 @@ const NavBar = () => {
             ))}
             <Button
               id="product-button-mobile"
-              title="Products"
-              rightIcon={<TiLocationArrow />}
+              title="Buy Moon "
+              rightIcon={<TiLocationArrow />}  //here I want wolf icon
               containerClass="bg-blue-50 flex items-center justify-center gap-1 w-full"
             />
           </div>
